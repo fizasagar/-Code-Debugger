@@ -1,27 +1,27 @@
 import streamlit as st
-import subprocess
-import tempfile
+import ast
+
+# 🏠 Streamlit UI Setup
+st.title("🐍 AI-Powered Code Debugger")
+st.write("Paste your Python code below and click 'Debug' to find errors! 🛠️")
+
+# 📌 User input area
+code = st.text_area("Enter Python Code:", height=200)
 
 def analyze_code(code):
-    # Temporary file to store user code
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".py") as temp_file:
-        temp_file.write(code.encode())
-        temp_file_path = temp_file.name
-    
-    # Run Pylint to check for errors
-    result = subprocess.run(["pylint", temp_file_path, "--disable=all", "--enable=E"], capture_output=True, text=True)
-    return result.stdout
+    try:
+        # 🌱 Parsing code to check syntax
+        ast.parse(code)
+        return "✅ No syntax errors found! Your code looks good."
+    except SyntaxError as e:
+        return f"❌ Syntax Error: {e.msg} at line {e.lineno}"
+    except Exception as e:
+        return f"⚠️ Other Error: {str(e)}"
 
-# Streamlit UI
-st.title("🐍 Simple Python Code Debugger")
-st.write("Paste your Python code below to check for errors!")
-
-code = st.text_area("Enter your Python code:")
-
-if st.button("Check for Errors"):
+# 🎯 Debug button
+if st.button("Debug Code"):
     if code.strip():
-        errors = analyze_code(code)
-        st.subheader("🛠️ Debugging Report:")
-        st.code(errors if errors else "✅ No errors found!", language="text")
+        result = analyze_code(code)
+        st.code(result)
     else:
-        st.warning("Please enter some code to analyze.")
+        st.warning("⚠️ Please enter some code to debug!")
