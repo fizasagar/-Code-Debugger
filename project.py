@@ -12,7 +12,7 @@ st.markdown("""
             background-color: #a7d1f9;
         }
         .stButton>button {
-            background-color: #4138f3;
+            background-color: #27548A;
             color: white;
         }
         .stTextInput>div>div>input {
