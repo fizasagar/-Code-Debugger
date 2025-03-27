@@ -12,7 +12,7 @@ st.markdown("""
             background-color: #a7d1f9;
         }
         .stButton>button {
-            background-color: #4138f3;
+            background-color: #27548A;
             color: white;
         }
         .stTextInput>div>div>input {
@@ -26,7 +26,7 @@ st.title("🐍 AI-Powered Code Debugger")
 st.write("Paste your Python code below and click 'Debug' to find errors! 🛠️")
 
 #  User input area
-code = st.text_area("Enter Python Code:", height=200)
+code = st.text_area("Enter Python Code:", height=200, key="code_input")
 
 def analyze_code(code):
     try:
