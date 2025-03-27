@@ -26,7 +26,7 @@ st.title("🐍 AI-Powered Code Debugger")
 st.write("Paste your Python code below and click 'Debug' to find errors! 🛠️")
 
 #  User input area
-code = st.text_area("Enter Python Code:", height=200, key="code_input")
+code = st.text_area("Enter Python Code:", height=200, key="code_input_1")
 
 def analyze_code(code):
     try:
@@ -40,7 +40,7 @@ def analyze_code(code):
         return f"⚠️ Runtime Error: {str(e)}"
 
 #  Debug button
-if st.button("Debug Code"):
+if st.button("Debug Code", key="debug_button_1"):
     if code.strip():
         result = analyze_code(code)
         st.code(result)
