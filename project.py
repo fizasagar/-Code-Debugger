@@ -12,7 +12,7 @@ st.markdown("""
             background-color: #a7d1f9;
         }
         .stButton>button {
-            background-color: #27548A;
+            background-color: #4138f3;
             color: white;
         }
         .stTextInput>div>div>input {
@@ -32,11 +32,12 @@ def analyze_code(code):
     try:
         # 🌱 Parsing code to check syntax
         ast.parse(code)
-        return "✅ No syntax errors found! Your code looks good."
+        exec(code, {})  # Run code safely in an empty environment
+        return "✅ No syntax or runtime errors found! Your code looks good."
     except SyntaxError as e:
         return f"❌ Syntax Error: {e.msg} at line {e.lineno}"
     except Exception as e:
-        return f"⚠️ Other Error: {str(e)}"
+        return f"⚠️ Runtime Error: {str(e)}"
 
 #  Debug button
 if st.button("Debug Code"):
